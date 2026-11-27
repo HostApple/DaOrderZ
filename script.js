@@ -4,7 +4,7 @@ const menu = [
         name:"DAHAPPY SMASH",
         category: "BURGERS" ,
         price: 670,
-        image:"images/full_moon.jpg",
+        image:"images/dacat.png",
         description:"DOUBLE SMASH WITH ZESTIFIED MAGIC AND DAHAPPY STUFF",
 
     },
@@ -25,7 +25,7 @@ const menu = [
         name:"DaCoke ( the legal stuff )",
         category:"DRINKS",
         price: 67 , 
-        image:"images/full_moon.jpg",
+        image:"images/dacat.png",
         description:"Might have side effects , cant assure you :3"
         ,
     },

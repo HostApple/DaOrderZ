@@ -12,6 +12,10 @@ const sttuss=[
 
 ];
 
+function saveOrders(){
+    localStorage.setItem("daorderz-orderz",JSON.stringify(orders));
+}
+
 
 function renderTickets(){
     tcktlst.innerHTML="";
@@ -105,33 +109,12 @@ function renderTickets(){
     const itm=document.createElement("div");
     itm.className="tickets-items";
 
+    (order.itm||[]).forEach(itm=>{
+        const line=document.createElement("div");
+        line.textContent=`${itm.name}× ${itm.quantity}`;
+        itm.appendChild(line);
+});
 
-
-    
-
-
-
-
-
-
-
-
-
-    if ( order.itm && order.itm.length >0){
-
-
-
-
-        order.itm.forEach(itm=> {
-            const line = document.createElement("div");
-
-            line.textContent=`${item.name || `ITEM#${item.id}`} ×  ${item.quantity}`;
-
-
-            itm.appendChild(line);
-        });
-
-    }
 
 
 
@@ -152,11 +135,13 @@ function renderTickets(){
 
 
 
-
+    const discount=document.createElement("p");
+    discount.className="ticket-date";
+    discount.textContent= `DINO DISCOUNT:${Number(order.discountpercent||0).toFixed(1)}%`;
     const dt=document.createElement("p");
     dt.className="ticket-date";
     dt.textContent=order.dt || "DaOrderZ pass";
-    main.append(tp,npc,itm,total,dt);
+    main.append(tp,npc,itm,total,dt,discount);
 
 
 
@@ -187,22 +172,36 @@ function renderTickets(){
 
 
     nxt.addEventListener("click",()=>{
-        const curindex=sttuss.indexOf(order.sttus);
-        order.sttus=sttuss[(curindex+1)%sttuss.length];
+        const crnt=order.sttus||sttuss[0];
+        const index=sttuss.indexOf(crnt.trim());
 
 
 
 
-
-        localStorage.setItem("daorderz-orderz", JSON.stringify(orders));
+        order.sttus=sttuss[(index+1) % sttuss.length];
+        saveOrders();
         renderTickets();
     });
 
 
+    const remove=document.createElement("button");
+    remove.className="remove-pass";
+    remove.textContent="remove pass";
+
+
+    remove.addEventListener("click",()=>{
+        if(!confirm("remove this pass?")) 
+            return;
 
 
 
-    stub.append(admt,sttus,nxt);
+        orders=orders.filter(saved=>saved !==order);
+        saveOrders();
+        renderTickets();
+    });
+
+
+    stub.append(admt,sttus,nxt,remove);
     crd.append(main,stub);
     tcktlst.appendChild(crd);
     
@@ -210,5 +209,24 @@ function renderTickets(){
 
 
 });  
-}
+};
+
+
+
+const clearbtn=document.getElementById("clear-passes");
+clearbtn.addEventListener("click",()=> {
+    if(orders.length===0)
+        return;
+
+
+    if(!confirm("CKEAR ALL DaOrderZ passes?"))
+        return;
+
+
+
+
+    orders=[];
+    saveOrders();
+    renderTickets();
+})
 renderTickets();

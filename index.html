@@ -6,6 +6,7 @@
     <title>DaOrderZ - you gotta work a lil</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <script src="dino.js" defer></script>
 </head>
 <body>
 
@@ -70,7 +71,39 @@
 
 
 
+        <section id="dagame" class="game-sec">
+            <div class="gamehead">
+                <p clas="eyebrow">side quest</p>
+                <h2>DaDino</h2>
+                <p>Chrome dino copy :3</p>
 
+            </div>
+            <div class="game-shell">
+                <div class="game-topline">
+                    <span>Best:<strong id="dino-best">0</strong></span>
+                    <span>Score:<strong id="dino-score">0</strong></span>
+                    <span>Discount:<strong id="dino-discount">0%</strong></span>
+                </div>
+                <canvas
+                    id="dino-canvas"
+                    width="800"
+                    height="220">
+                </canvas>
+
+
+
+                <div class="game-control">
+                    <span>Space / tap to jump</span>
+                    <button id="dino-start">Start Game</button>
+                </div>
+
+
+
+                <p class="game-note">
+                    100 fragments = 1%off MAX DISCOUNT : 20%
+                </p>
+            </div>
+        </section>
         <section id="menu" class="menu-sec">
             <div class="menu-head">
                 <div>
